@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using _3110_Term_Project.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace _3110_Term_Project.Data
@@ -9,5 +10,8 @@ namespace _3110_Term_Project.Data
             : base(options)
         {
         }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Event> Events { get; set; }
     }
 }
+

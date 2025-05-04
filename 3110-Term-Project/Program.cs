@@ -39,6 +39,7 @@ namespace _3110_Term_Project
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
