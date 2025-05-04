@@ -6,7 +6,7 @@
         public int EventId { get; set; }
         public Event Event { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
+        public Person Person { get; set; }
         public string RegistrationStatus { get; set; }
     }
 

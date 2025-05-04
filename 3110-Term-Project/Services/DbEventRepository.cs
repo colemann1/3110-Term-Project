@@ -33,10 +33,10 @@ namespace _3110_Term_Project.Services
         public async Task<Event> AssignUserToEventAsync(int eventId, int userId)
         {
             var @event = await _db.Events.FindAsync(eventId);
-            var user = await _db.Users.FindAsync(userId);
+            var user = await _db.Persons.FindAsync(userId);
             if (@event != null && user != null)
             {
-                @event.Users.Add(user);
+                @event.Persons.Add(user);
                 await _db.SaveChangesAsync();
             }
             return @event;

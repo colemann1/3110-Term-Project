@@ -13,21 +13,21 @@ namespace _3110_Term_Project.Services
             _db = db;
         }
 
-        public async Task<List<User>> GetAllUsersAsync()
+        public async Task<List<Person>> GetAllUsersAsync()
         {
-            return await _db.Users.ToListAsync(); // Assuming your user table is named "Users"
+            return await _db.Persons.ToListAsync(); // Assuming your user table is named "Users"
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<Person> GetUserByIdAsync(int id)
         {
-            return await _db.Users.FirstOrDefaultAsync(u => u.Id == id); //Match your table and PK columns
+            return await _db.Persons.FirstOrDefaultAsync(u => u.Id == id); //Match your table and PK columns
         }
 
-        public async Task<User> CreateUserAsync(User user)
+        public async Task<Person> CreateUserAsync(Person person)
         {
-            _db.Users.Add(user);  // Match your table and PK columns
+            _db.Persons.Add(person);  // Match your table and PK columns
             await _db.SaveChangesAsync();
-            return user;
+            return person;
         }
     }
 }

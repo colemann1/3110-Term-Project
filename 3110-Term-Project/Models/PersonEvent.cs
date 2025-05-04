@@ -3,7 +3,7 @@
     public class PersonEvent
     {
         public int UserId { get; set; }
-        public User? User { get; set; }
+        public Person? Person { get; set; }
         public int EventId { get; set; }
         public Event? Event { get; set; }
         public DateTime RegistrationDate { get; set; } = DateTime.Now;

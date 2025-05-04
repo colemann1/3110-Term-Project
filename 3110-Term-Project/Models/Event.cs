@@ -15,6 +15,6 @@ namespace _3110_Term_Project.Models
         public Venue Venue { get; set; }
         public int Capacity { get; set; }
         public List<Registration> Registrations { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<Person> Persons { get; set; }
     }
 }

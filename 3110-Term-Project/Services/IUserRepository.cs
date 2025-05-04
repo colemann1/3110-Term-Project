@@ -5,8 +5,8 @@ namespace _3110_Term_Project.Services
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllUsersAsync();
-        Task<User> GetUserByIdAsync(int id);
-        Task<User> CreateUserAsync(User user);
+        Task<List<Person>> GetAllUsersAsync();
+        Task<Person> GetUserByIdAsync(int id);
+        Task<Person> CreateUserAsync(Person user);
     }
 }

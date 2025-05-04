@@ -66,7 +66,6 @@ namespace _3110_Term_Project.Controllers
                 Description = @event.Description,
                 EventDate = @event.EventDate,
                 Capacity = @event.Capacity,
-                //RegisteredUsers = @event.RegisteredUsers.Select(u => u.UserName).ToList() // Display usernames, maybe add more info.
             };
             return View(vm);
         }

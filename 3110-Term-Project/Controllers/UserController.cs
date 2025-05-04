@@ -17,10 +17,10 @@ namespace _3110_Term_Project.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _userRepo.GetAllUsersAsync();
-            var vm = users.Select(u => new UserDetailsVM
+            var vm = users.Select(u => new PersonDetailsVM
             {
                 Id = u.Id,
-                Username = u.Username,
+                Personname = u.Personname,
                 Email = u.Email
             }).ToList();
             return View(vm);
@@ -33,14 +33,14 @@ namespace _3110_Term_Project.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(User user)
+        public async Task<IActionResult> Create(Person person)
         {
             if (!ModelState.IsValid)
             {
-                return View(user);
+                return View(person);
             }
 
-            await _userRepo.CreateUserAsync(user);
+            await _userRepo.CreateUserAsync(person);
             return RedirectToAction(nameof(Index));
         }
     }

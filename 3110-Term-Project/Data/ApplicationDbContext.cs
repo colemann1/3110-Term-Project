@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace _3110_Term_Project.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -32,9 +32,35 @@ namespace _3110_Term_Project.Data
                 .HasForeignKey(r => r.EventId);
 
             modelBuilder.Entity<Registration>()
-                .HasOne(r => r.User)
+                .HasOne(r => r.Person)
                 .WithMany(u => u.Registrations)
                 .HasForeignKey(r => r.UserId);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .HasKey(l => new { l.LoginProvider, l.ProviderKey });
+
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .HasKey(r => new { r.UserId, r.RoleId });
+
+            modelBuilder.Entity<IdentityUserToken<string>>()
+                .HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
+
+            modelBuilder.Entity<IdentityUserClaim<string>>()
+                .ToTable("UserClaims");
+
+            modelBuilder.Entity<IdentityUserRole<string>>()
+                .ToTable("UserRoles");
+
+            modelBuilder.Entity<IdentityUserLogin<string>>()
+                .ToTable("UserLogins");
+
+            modelBuilder.Entity<IdentityUserToken<string>>()
+                .ToTable("UserTokens");
+
+            modelBuilder.Entity<IdentityRoleClaim<string>>()
+                .ToTable("RoleClaims");
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
