@@ -1,8 +1,9 @@
 ﻿using System.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace _3110_Term_Project.Models
 {
-    public class User
+    public class Person
     {
         public int Id { get; set; }
         public string Username { get; set; } = String.Empty;

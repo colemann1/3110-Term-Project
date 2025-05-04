@@ -1,6 +1,6 @@
 ﻿namespace _3110_Term_Project.Models.ViewModels
 {
-    public class UserDetailsVM
+    public class PersonDetailsVM
     {
         public int Id { get; set; }
         public string Username { get; set; }

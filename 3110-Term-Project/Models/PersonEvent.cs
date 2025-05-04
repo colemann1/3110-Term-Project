@@ -1,6 +1,6 @@
 ﻿namespace _3110_Term_Project.Models
 {
-    public class UserEvent
+    public class PersonEvent
     {
         public int UserId { get; set; }
         public User? User { get; set; }
