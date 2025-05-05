@@ -12,7 +12,7 @@ using _3110_Term_Project.Data;
 namespace _3110_Term_Project.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250505021106_InitialMigration")]
+    [Migration("20250505030237_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

@@ -14,15 +14,16 @@ namespace _3110_Term_Project.Controllers
             _userRepo = userRepo;
         }
 
+        // GET: /User/
         public async Task<IActionResult> Index()
         {
             var users = await _userRepo.GetAllUsersAsync();
-
             return View(users);
         }
 
+        // GET: /User/Create
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -32,10 +33,69 @@ namespace _3110_Term_Project.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(person);
+                return View(person);  
             }
 
             await _userRepo.CreateUserAsync(person);
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: /User/Edit/
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var person = await _userRepo.GetUserByIdAsync(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            return View(person);
+        }
+
+        // POST: /User/Edit/
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Person person)
+        {
+            if (id != person.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(person);
+            }
+
+            await _userRepo.UpdateUserAsync(person);
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: /User/Delete/
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var person = await _userRepo.GetUserByIdAsync(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            return View(person);
+        }
+
+        // POST: /User/Delete/
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var person = await _userRepo.GetUserByIdAsync(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            await _userRepo.DeleteUserAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

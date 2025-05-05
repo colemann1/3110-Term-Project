@@ -20,7 +20,14 @@ namespace _3110_Term_Project.Data
                 .HasKey(e => e.Id);
             modelBuilder.Entity<Event>()
                 .Property(e => e.Id)
-                .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd(); // auto-increment
+
+            modelBuilder.Entity<Person>()
+                .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Person>()
+                .Property(p => p.Id)
+                .ValueGeneratedOnAdd(); // auto-increment
 
             modelBuilder.Entity<Registration>()
                 .HasKey(r => new { r.EventId, r.UserId });

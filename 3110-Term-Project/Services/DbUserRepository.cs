@@ -6,7 +6,7 @@ namespace _3110_Term_Project.Services
 {
     public class DbUserRepository : IUserRepository
     {
-        private readonly ApplicationDbContext _db; // Use your actual DbContext class
+        private readonly ApplicationDbContext _db;
 
         public DbUserRepository(ApplicationDbContext db)
         {
@@ -15,19 +15,35 @@ namespace _3110_Term_Project.Services
 
         public async Task<List<Person>> GetAllUsersAsync()
         {
-            return await _db.Persons.ToListAsync(); // Assuming your user table is named "Users"
+            return await _db.Persons.ToListAsync();
         }
 
         public async Task<Person> GetUserByIdAsync(int id)
         {
-            return await _db.Persons.FirstOrDefaultAsync(u => u.Id == id); //Match your table and PK columns
+            return await _db.Persons.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<Person> CreateUserAsync(Person person)
         {
-            _db.Persons.Add(person);  // Match your table and PK columns
+            _db.Persons.Add(person);
             await _db.SaveChangesAsync();
             return person;
+        }
+
+        public async Task UpdateUserAsync(Person person)
+        {
+            _db.Entry(person).State = EntityState.Modified;
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            var person = await _db.Persons.FindAsync(id);
+            if (person != null)
+            {
+                _db.Persons.Remove(person);
+                await _db.SaveChangesAsync();
+            }
         }
     }
 }

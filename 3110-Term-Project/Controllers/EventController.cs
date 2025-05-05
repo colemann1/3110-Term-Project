@@ -35,7 +35,7 @@ namespace _3110_Term_Project.Controllers
         public async Task<IActionResult> Create([Bind("EventName,EventDate,Location,Description,Capacity")] Event @event)
         {
             if (!ModelState.IsValid)
-            {
+            {// Attempting to catch errors, could not create event.
                 var errors = ModelState.Values.SelectMany(x => x.Errors);
                 foreach (var error in errors)
                 {

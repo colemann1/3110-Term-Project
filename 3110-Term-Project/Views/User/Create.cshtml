@@ -1,0 +1,32 @@
+﻿@model _3110_Term_Project.Models.Person
+
+@{
+    ViewData["Title"] = "Create Person";
+}
+
+<h1>Create Person</h1>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Personname" class="control-label"></label>
+        <input asp-for="Personname" class="form-control" />
+        <span asp-validation-for="Personname" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- Add any other necessary fields for Person here -->
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

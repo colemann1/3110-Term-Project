@@ -1,32 +1,31 @@
 using System.Diagnostics;
+using _3110_Term_Project.Data;
 using _3110_Term_Project.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _3110_Term_Project.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        // This is the only constructor. It will be used for dependency injection.
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var stats = new StatsView
+            {
+                TotalPeople = await _context.Persons.CountAsync(),
+                TotalEvents = await _context.Events.CountAsync(),
+                TotalRegistrations = await _context.Registrations.CountAsync()
+            };
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(stats); // Pass the stats to the view
         }
     }
 }
