@@ -8,5 +8,7 @@ namespace _3110_Term_Project.Services
         Task<IEnumerable<Event>> GetAllEventsAsync();
         Task<Event> CreateEventAsync(Event newEvent);
         Task<Event> AssignUserToEventAsync(int eventId, int userId);
+        Task UpdateEventAsync(Event @event);
+        Task DeleteEventAsync(Event @event);
     }
 }

@@ -8,6 +8,5 @@
         public string Location { get; set; }
         public string? Description { get; set; }
         public int Capacity { get; set; }
-        public string VenueName { get; set; } // Display venue name instead of Id?
     }
 }

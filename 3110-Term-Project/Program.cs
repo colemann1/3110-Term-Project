@@ -1,4 +1,5 @@
 using _3110_Term_Project.Data;
+using _3110_Term_Project.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,9 @@ namespace _3110_Term_Project
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddTransient<IEventRepository, DbEventRepository>();
+            builder.Services.AddTransient<IUserRepository, DbUserRepository>();
 
             var app = builder.Build();
 

@@ -14,14 +14,13 @@ namespace _3110_Term_Project.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Registration> Registrations { get; set; }
         public DbSet<Person> Persons { get; set; }
-        public DbSet<Venue> Venues { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Event>()
-                .HasOne(e => e.Venue)
-                .WithMany(v => v.Events)
-                .HasForeignKey(e => e.VenueId);
+                .HasKey(e => e.Id);
+            modelBuilder.Entity<Event>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
 
             modelBuilder.Entity<Registration>()
                 .HasKey(r => new { r.EventId, r.UserId });

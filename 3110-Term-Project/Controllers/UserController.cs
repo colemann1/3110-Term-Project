@@ -17,13 +17,8 @@ namespace _3110_Term_Project.Controllers
         public async Task<IActionResult> Index()
         {
             var users = await _userRepo.GetAllUsersAsync();
-            var vm = users.Select(u => new PersonDetailsVM
-            {
-                Id = u.Id,
-                Personname = u.Personname,
-                Email = u.Email
-            }).ToList();
-            return View(vm);
+
+            return View(users);
         }
 
         [HttpGet]

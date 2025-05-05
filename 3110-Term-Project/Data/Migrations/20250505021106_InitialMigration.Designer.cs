@@ -12,7 +12,7 @@ using _3110_Term_Project.Data;
 namespace _3110_Term_Project.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250504233120_InitialMigration")]
+    [Migration("20250505021106_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -268,12 +268,7 @@ namespace _3110_Term_Project.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VenueId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("VenueId");
 
                     b.ToTable("Events");
                 });
@@ -291,10 +286,6 @@ namespace _3110_Term_Project.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Personname")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Roles")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -323,30 +314,6 @@ namespace _3110_Term_Project.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Registrations");
-                });
-
-            modelBuilder.Entity("_3110_Term_Project.Models.Venue", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("VenueName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Venues");
                 });
 
             modelBuilder.Entity("EventPerson", b =>
@@ -415,17 +382,6 @@ namespace _3110_Term_Project.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("_3110_Term_Project.Models.Event", b =>
-                {
-                    b.HasOne("_3110_Term_Project.Models.Venue", "Venue")
-                        .WithMany("Events")
-                        .HasForeignKey("VenueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Venue");
-                });
-
             modelBuilder.Entity("_3110_Term_Project.Models.Registration", b =>
                 {
                     b.HasOne("_3110_Term_Project.Models.Event", "Event")
@@ -453,11 +409,6 @@ namespace _3110_Term_Project.Data.Migrations
             modelBuilder.Entity("_3110_Term_Project.Models.Person", b =>
                 {
                     b.Navigation("Registrations");
-                });
-
-            modelBuilder.Entity("_3110_Term_Project.Models.Venue", b =>
-                {
-                    b.Navigation("Events");
                 });
 #pragma warning restore 612, 618
         }

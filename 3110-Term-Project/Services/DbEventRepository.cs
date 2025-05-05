@@ -41,5 +41,16 @@ namespace _3110_Term_Project.Services
             }
             return @event;
         }
+        public async Task UpdateEventAsync(Event @event)
+        {
+            _db.Events.Update(@event);
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task DeleteEventAsync(Event @event)
+        {
+            _db.Events.Remove(@event);
+            await _db.SaveChangesAsync();
+        }
     }
 }
